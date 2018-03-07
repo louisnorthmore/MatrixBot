@@ -43,9 +43,12 @@ let CreateClient = (token) => {
         if (event.getType() !== "m.room.message") return;
         if (event.getSender() == config.userid) return;
         if (event.event.unsigned.age > 10000) return;
+
+        console.log("[" + dateformat(event.event.origin_server_ts, "HH:MM:ss") + " / " + room.name + " / "+ event.event.unsigned.age +"] " + event.event.sender + ": " + event.event.content.body);
+
         if (event.event.content.body.charAt(0) == '!') {
-            console.log("[" + dateformat(event.event.origin_server_ts, "HH:MM:ss") + " / " + room.name + " / "+ event.event.unsigned.age +"] " + event.event.sender + ": " + event.event.content.body);
-            let data = { 
+            //console.log("[" + dateformat(event.event.origin_server_ts, "HH:MM:ss") + " / " + room.name + " / "+ event.event.unsigned.age +"] " + event.event.sender + ": " + event.event.content.body);
+            let data = {
                 id: room.roomId,
                 sender: event.event.sender
             };
